@@ -1,10 +1,11 @@
-package asensio.cristina.androidstudyguide
+package asensio.cristina.androidstudyguide.articlelist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import asensio.cristina.androidstudyguide.R
 
 
 class ArticleListFragment : Fragment() {
