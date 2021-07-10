@@ -1,9 +1,12 @@
 package asensio.cristina.androidstudyguide.articlelist
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import asensio.cristina.androidstudyguide.R
 import asensio.cristina.androidstudyguide.databinding.ListItemArticleBinding
 import asensio.cristina.androidstudyguide.models.Article
 
@@ -36,26 +39,34 @@ class ArticleAdapter(private val articleClickListener: ArticleClickListener) :
         private val articleClickListener: ArticleClickListener
     ) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-//        private val titleTextView: TextView = binding.articleTitle
-//        private val authorTextView: TextView = binding.articleAuthor
+
+        private val titleTextView: TextView = binding.articleTitle
+        private val authorTextView: TextView = binding.articleAuthor
+        private var article: Article? = null
 
         init {
             binding.root.setOnClickListener(this)
         }
 
         fun bindArticle(article: Article) {
-            binding.article = article
-            binding.executePendingBindings()
-//            titleTextView.text = article.title
-//            authorTextView.text = article.authorName
+            // Data binding
+//            binding.article = article
+//            binding.executePendingBindings()
+
+            // View binding
+            this.article = article
+            titleTextView.text = Html.fromHtml(article.title, Html.FROM_HTML_MODE_LEGACY)
+            authorTextView.text = itemView.context.getString(R.string.by_author, article.authorName)
         }
 
         override fun onClick(view: View?) {
-            val article = binding.article
+            // Data binding
+            //val article = binding.article
+//            if (article != null) {
+//                articleClickListener.onArticleClick(article)
+//            }
 
-            if (article != null) {
-                articleClickListener.onArticleClick(article)
-            }
+            article?.let(articleClickListener::onArticleClick)
 
         }
     }
