@@ -15,6 +15,6 @@ private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
         title = this.title,
         authorName = this.author.name,
-        url = this.url
+        url = this.link.href.orEmpty()
     )
 }
