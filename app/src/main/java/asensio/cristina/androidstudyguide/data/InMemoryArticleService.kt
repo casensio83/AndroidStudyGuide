@@ -4,7 +4,7 @@ import asensio.cristina.androidstudyguide.models.Article
 
 class InMemoryArticleService: ArticleRepository {
 
-    override fun fetchArticles(): List<Article> {
+    override suspend fun fetchArticles(): List<Article> {
         return listOf(
             Article(
                 title = "Unit Testing Custom Lint Checks",
