@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -33,7 +34,8 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        viewBinding = true
+        viewBinding = true // Makes access to views easier
+        dataBinding = true // If we add more data to article we don't need to touch adapter
     }
 }
 
