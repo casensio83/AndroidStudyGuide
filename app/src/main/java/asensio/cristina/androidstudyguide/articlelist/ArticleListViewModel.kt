@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import asensio.cristina.androidstudyguide.data.ArticleRepository
 import asensio.cristina.androidstudyguide.models.Article
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArticleListViewModel(
     articleRepository: ArticleRepository
@@ -21,12 +19,7 @@ class ArticleListViewModel(
     init {
 
         viewModelScope.launch {
-
-            // Run fetch articles in the background
-            val fetchedArticles = withContext(Dispatchers.IO) {
-                articleRepository.fetchArticles()
-            }
-
+            val fetchedArticles = articleRepository.fetchArticles()
             _articles.value = fetchedArticles
         }
 
