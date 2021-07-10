@@ -6,5 +6,5 @@ import asensio.cristina.androidstudyguide.models.Article
  * Represents any source of articles to be displayed
  */
 interface ArticleRepository {
-    fun fetchArticles(): List<Article>
+    suspend fun fetchArticles(): List<Article>
 }

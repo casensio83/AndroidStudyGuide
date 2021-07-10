@@ -3,11 +3,12 @@ package asensio.cristina.androidstudyguide.articlelist
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import asensio.cristina.androidstudyguide.data.ArticleRepository
@@ -20,8 +21,28 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
+    private lateinit var viewModel: ArticleListViewModel
 
-    private val articleRepository: ArticleRepository = InMemoryArticleService()
+    private val articleListViewModelFactory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            val repository: ArticleRepository = InMemoryArticleService()
+            return ArticleListViewModel(
+                articleRepository = repository
+            ) as T
+        }
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Checks if a viewmodel already exists for this fragment and if not it will
+        // create a new one
+        viewModel = ViewModelProvider(
+            this,
+            articleListViewModelFactory
+        ).get(ArticleListViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +58,14 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articles = articleRepository.fetchArticles()
+        subscribeToViewModel()
 
-        articles.forEach {
-            Log.d("article > ", it.title)
-        }
+    }
 
-        adapter.articles = articleRepository.fetchArticles()
+    private fun subscribeToViewModel() {
+        viewModel.articles.observe(viewLifecycleOwner, { articles ->
+            adapter.articles = articles
+        })
     }
 
     private fun setupRecyclerView() {
