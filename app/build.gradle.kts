@@ -49,6 +49,16 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
 
+    // Retrofit for fetching data from service
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // Interceptor useful to log http requests errors
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+    // xml parser
+    implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
+
+
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
