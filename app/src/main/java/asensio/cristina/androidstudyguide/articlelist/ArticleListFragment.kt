@@ -1,5 +1,7 @@
 package asensio.cristina.androidstudyguide.articlelist
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import asensio.cristina.androidstudyguide.data.ArticleRepository
 import asensio.cristina.androidstudyguide.data.InMemoryArticleService
 import asensio.cristina.androidstudyguide.databinding.FragmentArticleListBinding
+import asensio.cristina.androidstudyguide.models.Article
 
 
-class ArticleListFragment : Fragment() {
+class ArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
@@ -25,7 +28,7 @@ class ArticleListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = ArticleAdapter()
+        adapter = ArticleAdapter(this)
         binding = FragmentArticleListBinding.inflate(inflater, container, false)
         setupRecyclerView()
         return binding.root
@@ -50,6 +53,12 @@ class ArticleListFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 
         binding.articleList.addItemDecoration(dividerItemDecoration)
+    }
+
+    override fun onArticleClick(article: Article) {
+        val uri = Uri.parse(article.url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 
 }
