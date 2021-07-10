@@ -1,6 +1,5 @@
 package asensio.cristina.androidstudyguide.articlelist
 
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +54,7 @@ class ArticleAdapter(private val articleClickListener: ArticleClickListener) :
 
             // View binding
             this.article = article
-            titleTextView.text = Html.fromHtml(article.title, Html.FROM_HTML_MODE_LEGACY)
+            titleTextView.text = article.htmlTitle.getSpanned()
             authorTextView.text = itemView.context.getString(R.string.by_author, article.authorName)
         }
 
