@@ -1,6 +1,5 @@
 package asensio.cristina.androidstudyguide.data.remote.androidessence
 
-import asensio.cristina.androidstudyguide.models.Article
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
@@ -9,14 +8,14 @@ data class AndroidEssenceFeedItem(
 
     @field:Element(name = "title")
     @param:Element(name = "title")
-    val title: String = ""
+    val title: String = "",
 
-) {
-    fun toArticle(): Article {
-        return Article(
-            title = this.title,
-            authorName = "",
-            url = ""
-        )
-    }
-}
+    @field:Element(name = "id")
+    @param:Element(name = "id")
+    val url: String = "",
+
+    @field:Element(name = "author")
+    @param:Element(name = "author")
+    val author: AndroidEssenceAuthor = AndroidEssenceAuthor()
+
+)
