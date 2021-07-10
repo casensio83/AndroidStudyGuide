@@ -8,14 +8,14 @@ data class AndroidEssenceFeedItem(
 
     @field:Element(name = "title")
     @param:Element(name = "title")
-    val title: String = "",
+    val title: String? = null,
 
     @field:Element(name = "author")
     @param:Element(name = "author")
-    val author: AndroidEssenceAuthor = AndroidEssenceAuthor(),
+    val author: AndroidEssenceAuthor? = null,
 
     @field:Element(name = "link")
     @param:Element(name = "link")
-    val link: AndroidEssenceLink = AndroidEssenceLink()
+    val link: AndroidEssenceLink? = null
 
 )

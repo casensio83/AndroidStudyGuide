@@ -8,5 +8,5 @@ data class AndroidEssenceFeed(
 
     @field:ElementList(name = "entry", inline = true)
     @param:ElementList(name = "entry", inline = true)
-    val items: List<AndroidEssenceFeedItem>
+    val items: List<AndroidEssenceFeedItem>? = null
 )
