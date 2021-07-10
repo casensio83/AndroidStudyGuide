@@ -2,6 +2,7 @@ package asensio.cristina.androidstudyguide.data.remote.androidessence
 
 import asensio.cristina.androidstudyguide.data.ArticleRepository
 import asensio.cristina.androidstudyguide.models.Article
+import asensio.cristina.androidstudyguide.util.HtmlString
 
 class AndroidEssenceArticleService(
     private val api: AndroidEssenceRetrofitAPI
@@ -13,7 +14,7 @@ class AndroidEssenceArticleService(
 
 private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
-        title = this.title,
+        htmlTitle = HtmlString(this.title),
         authorName = this.author.name,
         url = this.link.href.orEmpty()
     )
