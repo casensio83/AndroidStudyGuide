@@ -8,7 +8,7 @@ import asensio.cristina.androidstudyguide.util.HtmlString
  * Any one who creates an instance of Article wil lneed to encode their title first
  */
 data class Article(
-    val htmlTitle: HtmlString,
-    val authorName: String,
-    val url: String
+    val htmlTitle: HtmlString = HtmlString(""),
+    val authorName: String = "",
+    val url: String = ""
 )

@@ -16,6 +16,7 @@ import asensio.cristina.androidstudyguide.data.remote.androidessence.AndroidEsse
 import asensio.cristina.androidstudyguide.data.remote.androidessence.AndroidEssenceRetrofitAPI
 import asensio.cristina.androidstudyguide.databinding.FragmentArticleListBinding
 import asensio.cristina.androidstudyguide.models.Article
+import asensio.cristina.androidstudyguide.util.visibleIf
 
 
 class ArticleListFragment : Fragment(), ArticleClickListener {
@@ -72,9 +73,19 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.articles.observe(viewLifecycleOwner, { articles ->
-            adapter.articles = articles
+//        viewModel.articles.observe(viewLifecycleOwner, { articles ->
+//            adapter.articles = articles
+//        })
+
+        viewModel.state.observe(viewLifecycleOwner, { viewState ->
+            displayArticlesViewState(viewState)
         })
+    }
+
+    private fun displayArticlesViewState(viewState: ArticleListViewState) {
+        binding.progressBar.visibleIf(viewState.showLoading)
+        binding.articleList.visibleIf(viewState.showArticles)
+        adapter.articles = viewState.articles
     }
 
     private fun setupRecyclerView() {
